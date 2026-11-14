@@ -18,3 +18,9 @@ gcc -Wall -pedantic -Werror -Wextra -std=gnu89 calculator.c -o calculator
 ## Author
 
 Sara
+
+## Number type
+
+The calculator uses decimal numbers (double). Results are printed
+with %g, so 10 / 4 gives 2.5 and 10 + 25 gives 35.
+Division by zero prints "Error: division by zero".

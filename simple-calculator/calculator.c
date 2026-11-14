@@ -1,14 +1,17 @@
 #include <stdio.h>
 
 /**
- * main - entry point of the simple calculator
+ * main - simple calculator working with decimal numbers (double)
+ *
+ * Description: results are printed with %g, so whole numbers appear
+ * without a decimal part (35) and fractions appear as needed (2.5).
  *
  * Return: Always 0
  */
 int main(void)
 {
 	int choice;
-	int a, b;
+	double a, b;
 
 	printf("Simple Calculator\n");
 
@@ -27,37 +30,27 @@ int main(void)
 		{
 			printf("Bye!\n");
 		}
-		else if (choice == 1)
+		else if (choice >= 1 && choice <= 4)
 		{
 			printf("A: ");
-			if (scanf("%d", &a) != 1)
+			if (scanf("%lf", &a) != 1)
 				return (1);
 			printf("B: ");
-			if (scanf("%d", &b) != 1)
+			if (scanf("%lf", &b) != 1)
 				return (1);
-			printf("Result: %d\n", a + b);
+
+			if (choice == 1)
+				printf("Result: %g\n", a + b);
+			else if (choice == 2)
+				printf("Result: %g\n", a - b);
+			else if (choice == 3)
+				printf("Result: %g\n", a * b);
+			else if (b == 0)
+				printf("Error: division by zero\n");
+			else
+				printf("Result: %g\n", a / b);
 		}
-		else if (choice == 2)
-		{
-			printf("A: ");
-			if (scanf("%d", &a) != 1)
-				return (1);
-			printf("B: ");
-			if (scanf("%d", &b) != 1)
-				return (1);
-			printf("Result: %d\n", a - b);
-		}
-		else if (choice == 3)
-		{
-			printf("A: ");
-			if (scanf("%d", &a) != 1)
-				return (1);
-			printf("B: ");
-			if (scanf("%d", &b) != 1)
-				return (1);
-			printf("Result: %d\n", a * b);
-		}
-		else if (choice < 0 || choice > 4)
+		else
 		{
 			printf("Invalid choice\n");
 		}
