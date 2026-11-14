@@ -1,5 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
+#include <stddef.h>
 
 void reset_to_98(int *n);
 void swap_int(int *a, int *b);
@@ -22,4 +23,6 @@ char *string_toupper(char *str);
 char *cap_string(char *str);
 char *leet(char *str);
 char *_memset(char *s, char b, unsigned int n);
+char *_strchr(char *s, char c);
+char *_strchr(char *s, char c);
 #endif
