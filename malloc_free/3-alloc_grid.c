@@ -2,37 +2,51 @@
 #include <stdlib.h>
 
 /**
- * alloc_grid - returns a 2D array of integers initialized to 0
- * @width: width of the grid
- * @height: height of the grid
+ * alloc_grid - returns a pointer to a 2 dimensional array of integers.
+ * @width: the width of the grid (columns)
+ * @height: the height of the grid (rows)
  *
- * Return: pointer to the grid, or NULL on failure
+ * Return: pointer to the 2D array, or NULL on failure
+ *         If width or height is 0 or negative, return NULL
  */
 int **alloc_grid(int width, int height)
 {
-	int **grid;
-	int i, j;
+    int **grid;
+    int h, w;
 
-	if (width <= 0 || height <= 0)
-		return (NULL);
+    /* 1. التحقق من الحدود المنطقية للمصفوفة */
+    if (width <= 0 || height <= 0)
+        return (NULL);
 
-	grid = malloc(sizeof(int *) * height);
-	if (grid == NULL)
-		return (NULL);
+    /* 2. حجز الذاكرة للصفوف (الطوابق الأساسية) */
+    grid = malloc(sizeof(int *) * height);
+    if (grid == NULL)
+        return (NULL);
 
-	for (i = 0; i < height; i++)
-	{
-		grid[i] = malloc(sizeof(int) * width);
-		if (grid[i] == NULL)
-		{
-			for (j = 0; j < i; j++)
-				free(grid[j]);
-			free(grid);
-			return (NULL);
-		}
-		for (j = 0; j < width; j++)
-			grid[i][j] = 0;
-	}
+    /* 3. حجز الذاكرة للأعمدة لكل صف على حدة */
+    for (h = 0; h < height; h++)
+    {
+        grid[h] = malloc(sizeof(int) * width);
+        if (grid[h] == NULL)
+        {
+            /* هندسة الحماية (Error Handling): لو فشل حجز صف، نظف ما تم حجزه مسبقاً */
+            while (h >= 0)
+            {
+                free(grid[h]);
+                h--;
+            }
+            free(grid);
+            return (NULL);
+        }
 
-	return (grid);
+        /* 4. تعبئة كل خانة بالقيمة الافتراضية 0 */
+        for (w = 0; w < width; w++)
+        {
+            grid[h][w] = 0;
+        }
+    }
+
+    /* 5. إرجاع المؤشر المزدوج للمصفوفة بنجاح */
+    return (grid);
 }
+
