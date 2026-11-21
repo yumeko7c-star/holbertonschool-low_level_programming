@@ -1,4 +1,4 @@
 # More Malloc/Free
 
-This project contains C exercises that practice dynamic memory allocation and
-error handling using `malloc`, `calloc`, `realloc`, and `free`.
+This project contains C exercises that practice dynamic memory allocation in C,
+including checking `malloc` and concatenating strings in newly allocated memory.
